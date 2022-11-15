@@ -10,10 +10,23 @@ public class App {
         return "Hello World!";
     }
 
+    public static TAction buttonAction() {
+        return new TAction() {
+            public void DO() {
+                System.out.println("Button pressed");
+            }
+        };
+    }
+
     public static void main(String[] args) throws Exception {
         TApplication app = new TApplication(TApplication.BackendType.SWING);
+        //create the expression window
+        TWindow window = new TWindow(app, "Expression", 20, 20);
+        //create the expression field
+        TField field = window.addField(2, 2, 16, false);
+        field.setActiveColorKey("Black");
+        //create the buttons with sensible colours
+        TButton button = window.addButton("calculate", 2, 4,  buttonAction());
         app.run();
-
-        System.out.println(new App().getGreeting());
     }
 }
